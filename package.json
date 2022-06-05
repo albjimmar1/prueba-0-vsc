@@ -1,0 +1,23 @@
+{
+  "name": "prueba-0-vsc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albjimmar1/prueba-0-vsc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albjimmar1/prueba-0-vsc/issues"
+  },
+  "homepage": "https://github.com/albjimmar1/prueba-0-vsc#readme",
+  "dependencies": {
+    "express": "4.18.1"
+  }
+}
