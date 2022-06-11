@@ -11,20 +11,20 @@ import accountRouter from './routes/account.js';
 const PORT = process.env.PORT || 3000;
 const express = createExpressServer();
 
-express.use(express.json());
-express.use(express.text());
+express.use(createExpressServer.json());
+express.use(createExpressServer.text());
 
 express.use("/account", accountRouter);
+
+express.listen(PORT, () =>
+    console.log('Server on port ${PORT}')
+);
 
 /*express.get("/account/:idAccount", (request, response) => {
     console.log(request.params);
     console.log(request.body);
     response.sendStatus("Your personal account");
-})
-
-express.listen(PORT, () =>
-    console.log('Server on port ${PORT}')
-);*/
+})*/
 
 /*
 const httpServer = createServer((request, response) => {

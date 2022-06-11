@@ -3,16 +3,16 @@ import { USERS_BD } from '../bbdd.js';
 
 const accountRouter = createExpressServer.Router();
 
-accountRouter.use((request, response, next) => { 
+/*accountRouter.use((request, response, next) => { 
 
     next();
-});
+});*/
 
-accountRouter.get('/:guid', (request, response) => {
-    const { guid } = request.params.guid;
+accountRouter.get("/:guid", (request, response) => {
+    const { guid } = request.params;
     const user = USERS_BD.find(user => user.guid === guid);
     if (!user) return response.status(404).send();
-    return res.send(user);
+    return response.send(user);
 });
 
 accountRouter.post('/', (request, response) => {
@@ -26,8 +26,8 @@ accountRouter.post('/', (request, response) => {
     return response.send();
 });
 
-accountRouter.path('/:guid', (request, response) => {
-    const { guid } = request.params.guid;
+accountRouter.patch('/:guid', (request, response) => {
+    const { guid } = request.params;
     const { name } = request.body;
     if (!name) return response.status(400).send();
     const user = USERS_BD.find(user => user.guid === guid);
@@ -37,7 +37,7 @@ accountRouter.path('/:guid', (request, response) => {
 });
 
 accountRouter.delete('/:guid', (request, response) => {
-    const { guid } = request.params.guid;
+    const { guid } = request.params;
     const userIndex = USERS_BD.findIndex(user => user.guid === guid);
     if (userIndex === -1) return response.status(404).send();
     USERS_BD.splice(userIndex, 1);
