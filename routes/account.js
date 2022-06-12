@@ -1,20 +1,23 @@
-import createExpressServer from 'express';
+import { Router } from 'express';
 import { USERS_BD } from '../bbdd.js';
 
-const accountRouter = createExpressServer.Router();
+const accountRouter = Router();
 
-/*accountRouter.use((request, response, next) => { 
-
+//Middleware ip log
+accountRouter.use((request, response, next) => { 
+    console.log(request.ip);
     next();
-});*/
+});
 
-accountRouter.get("/:guid", (request, response) => {
+//Get a user
+accountRouter.get('/:guid', (request, response) => {
     const { guid } = request.params;
     const user = USERS_BD.find(user => user.guid === guid);
     if (!user) return response.status(404).send();
     return response.send(user);
 });
 
+//Create a user 
 accountRouter.post('/', (request, response) => {
     const { guid, name } = request.body;
     if (!guid || !name) return response.status(400).send();
@@ -26,6 +29,7 @@ accountRouter.post('/', (request, response) => {
     return response.send();
 });
 
+//Modify a user
 accountRouter.patch('/:guid', (request, response) => {
     const { guid } = request.params;
     const { name } = request.body;
@@ -36,6 +40,7 @@ accountRouter.patch('/:guid', (request, response) => {
     return response.send();
 });
 
+//Delete a user
 accountRouter.delete('/:guid', (request, response) => {
     const { guid } = request.params;
     const userIndex = USERS_BD.findIndex(user => user.guid === guid);

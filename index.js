@@ -1,23 +1,32 @@
 //const operations = require("./operations");
 //console.log(operations.sum(1, 2));
 
-//import dotenv from 'dotenv';
 //import { createServer } from 'http';
-import createExpressServer from 'express';
-import accountRouter from './routes/account.js';
-
+import 'dotenv/config';
+//import dotenv from 'dotenv';
 //dotenv.config();
+import createExpressServer from 'express';
+import cookieParser from "cookie-parser";
+import accountRouter from './routes/account.js';
+import authRouter from './routes/auth.js';
+import authSessionRouter from './routes/auth_session.js';
+import authTokenRouter from './routes/auth_token.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const express = createExpressServer();
 
+express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
 
-express.use("/account", accountRouter);
+express.use('/account', accountRouter);
+express.use('/auth', authRouter);
+
+express.use('/auth-session', authSessionRouter);
+express.use('/auth-token', authTokenRouter);
 
 express.listen(PORT, () =>
-    console.log('Server on port ${PORT}')
+    console.log('Server on port %d', PORT)
 );
 
 /*express.get("/account/:idAccount", (request, response) => {
