@@ -5,6 +5,8 @@
 import 'dotenv/config';
 //import dotenv from 'dotenv';
 //dotenv.config();
+import path from 'path';
+import {fileURLToPath} from 'url';
 import createExpressServer from 'express';
 import cookieParser from "cookie-parser";
 import accountRouter from './routes/account.js';
@@ -13,12 +15,23 @@ import authSessionRouter from './routes/auth_session.js';
 import authTokenRouter from './routes/auth_token.js';
 import mongoose from 'mongoose';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const PORT = process.env.PORT || 3001;
 const express = createExpressServer();
 
 express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
+
+express.use('/', createExpressServer.static(path.join(__dirname, "/")));
+
+express.get('/', (request, response) => { 
+    console.log(__dirname);
+    return response.send();
+    //return response.sendFile('./index.html');
+});
 
 express.use('/account', accountRouter);
 express.use('/auth', authRouter);
