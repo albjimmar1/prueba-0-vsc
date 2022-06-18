@@ -11,6 +11,7 @@ import accountRouter from './routes/account.js';
 import authRouter from './routes/auth.js';
 import authSessionRouter from './routes/auth_session.js';
 import authTokenRouter from './routes/auth_token.js';
+import mongoose from 'mongoose';
 
 const PORT = process.env.PORT || 3001;
 const express = createExpressServer();
@@ -25,9 +26,15 @@ express.use('/auth', authRouter);
 express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
-express.listen(PORT, () =>
-    console.log('Server on port %d', PORT)
-);
+const bootstrap = async () => { 
+    await mongoose.connect(process.env.MONGODB_URL);
+
+    express.listen(PORT, () =>
+        console.log('Server on port %d', PORT)
+    );
+}
+
+bootstrap();
 
 /*express.get("/account/:idAccount", (request, response) => {
     console.log(request.params);
