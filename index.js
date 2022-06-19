@@ -14,6 +14,7 @@ import authRouter from './routes/auth.js';
 import authSessionRouter from './routes/auth_session.js';
 import authTokenRouter from './routes/auth_token.js';
 import mongoose from 'mongoose';
+import ServerApiVersion from 'mongodb';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,10 +42,12 @@ express.use('/auth-token', authTokenRouter);
 const bootstrap = async () => { 
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
-            useNewUrlParser: true
-            //useUnifiedTopology: true
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverApi: ServerApiVersion.v1
+        }, () => { 
+            console.log('MongoDB connected');
         });
-        console.log('MongoDB connected');
     } catch (error) {
         console.log(error);
     } finally {
