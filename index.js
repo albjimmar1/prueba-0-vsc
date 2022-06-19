@@ -42,7 +42,19 @@ express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
 const bootstrap = async () => { 
-    try {
+    mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverApi: ServerApiVersion.v1
+    }).then(() => { 
+        console.log('MongoDB connected');
+        express.listen(PORT, () =>
+            console.log('Server on port %d', PORT)
+        );
+    }).catch(error => 
+        console.log('Error connecting mongoDB', error)
+    );
+    /*try {
         await mongoose.connect(process.env.MONGODB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -55,7 +67,7 @@ const bootstrap = async () => {
         });
     } catch (error) {
         console.log(error);
-    }
+    }*/
 }
 
 bootstrap();
