@@ -18,7 +18,7 @@ import mongoose from 'mongoose';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = process.env.PORT || 3001;
+const PORT = /*process.env.PORT ||*/ 3001;
 const express = createExpressServer();
 
 express.use(cookieParser());
@@ -39,13 +39,13 @@ express.use('/auth', authRouter);
 express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
-const bootstrap = async () => { 
+/*const bootstrap = async () => { 
     await mongoose.connect(process.env.MONGODB_URL);
 
-    express.listen(PORT, () =>
-        console.log('Server on port %d', PORT)
+    */express.listen(3001, () =>
+        console.log('Server on port %d', 3001)
     );
-}
+/*}*/
 
 bootstrap();
 
