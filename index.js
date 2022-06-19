@@ -39,7 +39,12 @@ express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
 const bootstrap = async () => { 
-    await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    },);
 
     express.listen(PORT, () =>
         console.log('Server on port %d', PORT)
