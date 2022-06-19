@@ -25,7 +25,7 @@ express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
 
-express.use('/', createExpressServer.static(path.join(__dirname, "")));
+express.use('/', createExpressServer.static(path.join(__dirname, "/")));
 
 express.get('/', (request, response) => { 
     //console.log(__dirname);
@@ -42,10 +42,10 @@ express.use('/auth-token', authTokenRouter);
 /*const bootstrap = async () => { 
     await mongoose.connect(process.env.MONGODB_URL);
 
-    express.listen(PORT, () =>
+    */express.listen(PORT, () =>
         console.log('Server on port %d', PORT)
     );
-}
+/*}
 
 bootstrap();*/
 
