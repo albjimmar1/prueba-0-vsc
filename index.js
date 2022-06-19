@@ -40,8 +40,8 @@ express.use('/auth-token', authTokenRouter);
 
 const bootstrap = async () => { 
     await mongoose.connect(process.env.MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+        useNewUrlParser: true
+        //useUnifiedTopology: true
     });
 
     express.listen(PORT, () =>
