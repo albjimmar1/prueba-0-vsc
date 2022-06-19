@@ -25,13 +25,13 @@ express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
 
-//express.use('/', createExpressServer.static(path.join(__dirname, "/")));
+express.use('/', createExpressServer.static(path.join(__dirname, "/")));
 
-express.get('/', (request, response) => { 
+/*express.get('/', (request, response) => { 
     //console.log(__dirname);
-    return response.send("Working");
-    //return response.sendFile('./index.html');
-});
+    //return response.send("Working");
+    return response.sendFile('./index.html');
+});*/
 
 express.use('/account', accountRouter);
 express.use('/auth', authRouter);
