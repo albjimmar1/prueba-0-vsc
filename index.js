@@ -8,6 +8,7 @@ import 'dotenv/config';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import createExpressServer from 'express';
+import cors from 'cors';
 import cookieParser from "cookie-parser";
 import accountRouter from './routes/account.js';
 import authRouter from './routes/auth.js';
@@ -25,6 +26,7 @@ const express = createExpressServer();
 express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
+express.use(cors());
 
 express.use('/', createExpressServer.static(path.join(__dirname, "/")));
 
