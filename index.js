@@ -39,7 +39,7 @@ express.use('/auth', authRouter);
 express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
-const bootstrap = async () => { 
+/*const bootstrap = async () => { 
     await mongoose.connect(process.env.MONGODB_URL);
 
     express.listen(PORT, () =>
@@ -47,7 +47,7 @@ const bootstrap = async () => {
     );
 }
 
-bootstrap();
+bootstrap();*/
 
 /*express.get("/account/:idAccount", (request, response) => {
     console.log(request.params);
