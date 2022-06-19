@@ -40,10 +40,11 @@ express.use('/auth-token', authTokenRouter);
 
 const bootstrap = async () => { 
     try {
-        mongoose.connect(process.env.MONGODB_URL, {
+        await mongoose.connect(process.env.MONGODB_URL, {
             useNewUrlParser: true
             //useUnifiedTopology: true
         });
+        console.log('MongoDB connected');
     } catch (error) {
         console.log(error);
     } finally {
