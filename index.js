@@ -49,13 +49,12 @@ const bootstrap = async () => {
             serverApi: ServerApiVersion.v1
         }, () => { 
             console.log('MongoDB connected');
+            express.listen(PORT, () =>
+                console.log('Server on port %d', PORT)
+            );
         });
     } catch (error) {
         console.log(error);
-    } finally {
-        express.listen(PORT, () =>
-            console.log('Server on port %d', PORT)
-        );
     }
 }
 
