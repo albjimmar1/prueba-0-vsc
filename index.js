@@ -18,20 +18,20 @@ import mongoose from 'mongoose';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = /*process.env.PORT ||*/ 3001;
+const PORT = process.env.PORT || 3001;
 const express = createExpressServer();
 
 express.use(cookieParser());
 express.use(createExpressServer.json());
 express.use(createExpressServer.text());
 
-express.use('/', createExpressServer.static(path.join(__dirname, "/")));
+express.use('/', createExpressServer.static(path.join(__dirname, "")));
 
-/*express.get('/', (request, response) => { 
+express.get('/', (request, response) => { 
     //console.log(__dirname);
     //return response.send("Working");
     return response.sendFile('./index.html');
-});*/
+});
 
 express.use('/account', accountRouter);
 express.use('/auth', authRouter);
@@ -39,13 +39,13 @@ express.use('/auth', authRouter);
 express.use('/auth-session', authSessionRouter);
 express.use('/auth-token', authTokenRouter);
 
-/*const bootstrap = async () => { 
+const bootstrap = async () => { 
     await mongoose.connect(process.env.MONGODB_URL);
 
-    */express.listen(3001, () =>
-        console.log('Server on port %d', 3001)
+    express.listen(PORT, () =>
+        console.log('Server on port %d', PORT)
     );
-/*}*/
+}
 
 bootstrap();
 
